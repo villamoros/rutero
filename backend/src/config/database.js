@@ -2,9 +2,20 @@ const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
 // En producción se usa PostgreSQL (como en la documentación de Notion).
-// Para el MVP con datos ficticios, si no hay DB_HOST se usa SQLite local.
+// - DATABASE_URL: la cadena de conexión que dan Neon, Supabase o Vercel (con SSL).
+// - DB_HOST, DB_NAME, DB_USER, DB_PASS: un PostgreSQL local.
+// Para el MVP con datos ficticios, si no hay ninguna de las dos se usa SQLite local.
 let sequelize;
-if (process.env.DB_HOST) {
+const url = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+if (url) {
+  sequelize = new Sequelize(url, {
+    dialect: "postgres",
+    dialectModule: require("pg"), // explícito para que el empaquetador de Vercel lo incluya
+    dialectOptions: { ssl: { require: true, rejectUnauthorized: false } },
+    pool: { max: 3 },
+    logging: false,
+  });
+} else if (process.env.DB_HOST) {
   sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
     host: process.env.DB_HOST,
     dialect: "postgres",

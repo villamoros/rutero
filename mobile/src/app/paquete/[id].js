@@ -4,7 +4,7 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, TextInput, View } from
 import { Boton, Etiqueta, Tarjeta } from "../../components/ui";
 import { api } from "../../lib/api";
 import { useBusqueda } from "../../lib/busqueda";
-import { cop, fechaCorta } from "../../lib/format";
+import { cop, fechaCorta, rangoCorto } from "../../lib/format";
 import { colors, fonts, TIPO_NOMBRE } from "../../lib/theme";
 
 export default function DetallePaquete() {
@@ -31,6 +31,7 @@ export default function DetallePaquete() {
         id_solicitud: busqueda?.solicitud?.id,
         personas: solicitud?.personas || 1,
         fecha_viaje: solicitud?.fecha_viaje,
+        fecha_regreso: solicitud?.fecha_regreso || undefined,
         ...contacto,
       });
       setReserva(r);
@@ -89,7 +90,7 @@ export default function DetallePaquete() {
         <Text style={styles.total}>{cop(paquete.precio * personas)}</Text>
         <Text style={styles.servicioCategoria}>
           {cop(paquete.precio)} por persona × {personas}
-          {solicitud?.fecha_viaje ? ` · salida ${fechaCorta(solicitud.fecha_viaje)}` : ""}
+          {solicitud?.fecha_viaje ? ` · ${rangoCorto(solicitud.fecha_viaje, solicitud.fecha_regreso)}` : ""}
         </Text>
         <Text style={[styles.servicioCategoria, { marginTop: 6 }]}>Disponible del {fechaCorta(paquete.fecha_inicio)} al {fechaCorta(paquete.fecha_fin)}</Text>
       </Tarjeta>

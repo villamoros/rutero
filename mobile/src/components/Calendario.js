@@ -7,9 +7,14 @@ const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "
 const DIAS = ["L", "M", "M", "J", "V", "S", "D"];
 
 // Calendario simple en JS puro: funciona igual en iOS, Android y web sin módulos nativos.
-export default function Calendario({ valor, onChange }) {
+// Sin `rango` se elige un día (valor = "AAAA-MM-DD").
+// Con `rango` funciona como Booking o Airbnb: primer toque es el inicio, el segundo el fin
+// (valor = { inicio, fin }); un tercer toque empieza un rango nuevo.
+export default function Calendario({ valor, onChange, rango = false }) {
   const hoy = hoyISO();
-  const inicial = valor || hoy;
+  const inicio = rango ? valor?.inicio : valor;
+  const fin = rango ? valor?.fin : null;
+  const inicial = inicio || hoy;
   const [anio, setAnio] = useState(Number(inicial.slice(0, 4)));
   const [mes, setMes] = useState(Number(inicial.slice(5, 7)) - 1);
 
@@ -22,6 +27,12 @@ export default function Calendario({ valor, onChange }) {
     const d = new Date(anio, mes + delta, 1);
     setAnio(d.getFullYear());
     setMes(d.getMonth());
+  }
+
+  function elegir(iso) {
+    if (!rango) return onChange(iso);
+    if (!inicio || fin || iso < inicio) return onChange({ inicio: iso, fin: null });
+    onChange({ inicio, fin: iso });
   }
 
   return (
@@ -43,17 +54,29 @@ export default function Calendario({ valor, onChange }) {
           if (!dia) return <View key={`v${i}`} style={styles.celda} />;
           const iso = toISO(anio, mes, dia);
           const pasado = iso < hoy;
-          const elegido = iso === valor;
+          const extremo = iso === inicio || iso === fin;
+          const dentro = !!(fin && iso > inicio && iso < fin);
           return (
-            <Pressable
-              key={iso}
-              disabled={pasado}
-              onPress={() => onChange(iso)}
-              style={[styles.celda, elegido && styles.elegido]}
-              accessibilityLabel={iso}
-            >
-              <Text style={[styles.dia, pasado && { opacity: 0.25 }, elegido && { color: colors.blanco }]}>{dia}</Text>
-            </Pressable>
+            <View key={iso} style={styles.celda}>
+              {fin && fin !== inicio && (dentro || extremo) && (
+                <View
+                  style={[
+                    styles.banda,
+                    iso === inicio && { left: "50%" },
+                    iso === fin && { right: "50%" },
+                  ]}
+                />
+              )}
+              <Pressable
+                disabled={pasado}
+                onPress={() => elegir(iso)}
+                style={[styles.dia, extremo && styles.elegido]}
+                accessibilityLabel={iso}
+                accessibilityState={{ selected: extremo || dentro }}
+              >
+                <Text style={[styles.diaTexto, pasado && { opacity: 0.25 }, extremo && styles.elegidoTexto]}>{dia}</Text>
+              </Pressable>
+            </View>
           );
         })}
       </View>
@@ -67,8 +90,11 @@ const styles = StyleSheet.create({
   flecha: { fontSize: 30, color: colors.tinta, paddingHorizontal: 8 },
   mes: { fontSize: 17, fontFamily: fonts.negrita, color: colors.texto },
   grilla: { flexDirection: "row", flexWrap: "wrap" },
-  celda: { width: `${100 / 7}%`, aspectRatio: 1, alignItems: "center", justifyContent: "center", borderRadius: 999 },
+  celda: { width: `${100 / 7}%`, aspectRatio: 1, alignItems: "center", justifyContent: "center" },
   diaSemana: { color: colors.suave, fontFamily: fonts.negrita, textAlign: "center", textAlignVertical: "center", lineHeight: 40 },
-  dia: { fontSize: 15, color: colors.texto },
+  banda: { position: "absolute", top: "12%", bottom: "12%", left: 0, right: 0, backgroundColor: colors.solClaro },
+  dia: { width: "76%", aspectRatio: 1, borderRadius: 999, alignItems: "center", justifyContent: "center" },
+  diaTexto: { fontSize: 15, color: colors.texto },
   elegido: { backgroundColor: colors.tinta },
+  elegidoTexto: { color: colors.blanco, fontFamily: fonts.negrita },
 });

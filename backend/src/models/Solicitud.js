@@ -9,7 +9,8 @@ const Solicitud = sequelize.define("Solicitud", {
   id_destino: DataTypes.INTEGER,
   tipo: DataTypes.STRING(20),
   personas: { type: DataTypes.INTEGER, allowNull: false },
-  fecha_viaje: { type: DataTypes.DATEONLY, allowNull: false },
+  fecha_viaje: { type: DataTypes.DATEONLY, allowNull: false }, // inicio del viaje (o el día de la pasadía)
+  fecha_regreso: DataTypes.DATEONLY, // fin del viaje; vacío en pasadías
   presupuesto: { type: DataTypes.DECIMAL(12, 2), allowNull: false }, // total para el grupo
   preferencias: { type: DataTypes.JSON, defaultValue: [] },
   fecha_creacion: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },

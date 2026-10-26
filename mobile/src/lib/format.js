@@ -19,3 +19,14 @@ export function hoyISO() {
 export function toISO(anio, mes, dia) {
   return `${anio}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
 }
+
+// Días del viaje contando el de inicio y el de fin (12 al 15 = 4 días).
+export function diasEntre(inicio, fin) {
+  return Math.round((Date.parse(fin) - Date.parse(inicio)) / 86400000) + 1;
+}
+
+export function rangoCorto(inicio, fin) {
+  if (!inicio) return "";
+  if (!fin || fin === inicio) return fechaCorta(inicio);
+  return `${fechaCorta(inicio)} al ${fechaCorta(fin)}`;
+}

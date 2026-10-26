@@ -11,6 +11,7 @@ const Reserva = sequelize.define("Reserva", {
   estado: { type: DataTypes.STRING(20), defaultValue: "pendiente", validate: { isIn: [ESTADOS] } },
   id_proveedor: DataTypes.INTEGER,
   fecha_viaje: DataTypes.DATEONLY, // *
+  fecha_regreso: DataTypes.DATEONLY, // * fin del viaje en tours y paquetes
   personas: { type: DataTypes.INTEGER, defaultValue: 1 }, // *
   id_solicitud: DataTypes.INTEGER, // * formulario que originó la reserva
 }, { tableName: "reservas", timestamps: false });

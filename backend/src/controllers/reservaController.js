@@ -3,7 +3,7 @@ const { sequelize, Cliente, Reserva, Paquete } = require("../models");
 // Crea una reserva en estado "pendiente". El pago y la confirmación del proveedor
 // quedan para la siguiente fase (tabla pagos del Notion).
 async function createReserva(req, res, next) {
-  const { id_paquete, id_solicitud, nombre, email, telefono, personas, fecha_viaje } = req.body || {};
+  const { id_paquete, id_solicitud, nombre, email, telefono, personas, fecha_viaje, fecha_regreso } = req.body || {};
   if (!id_paquete || !nombre || !email || !Number.isInteger(personas) || !fecha_viaje) {
     return res.status(400).json({ errores: ["id_paquete, nombre, email, personas y fecha_viaje son obligatorios"] });
   }
@@ -25,6 +25,7 @@ async function createReserva(req, res, next) {
         id_solicitud: id_solicitud || null,
         personas,
         fecha_viaje,
+        fecha_regreso: fecha_regreso || null,
         estado: "pendiente",
       }, { transaction });
     });

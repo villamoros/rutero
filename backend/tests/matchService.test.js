@@ -30,6 +30,13 @@ describe("buscarOfertas", () => {
     expect(buscarOfertas(solicitud, [largo]).resultados).toHaveLength(0);
   });
 
+  test("con fecha de fin solo deja los planes que caben entre inicio y fin", () => {
+    const tour3 = { ...base, id: 2, tipo: "tour", duracion_dias: 3 };
+    const tour5 = { ...base, id: 3, tipo: "tour", duracion_dias: 5 };
+    const rango = { ...solicitud, tipo: "tour", fecha_regreso: "2026-11-23" }; // 4 días
+    expect(buscarOfertas(rango, [tour3, tour5]).resultados.map((r) => r.paquete.id)).toEqual([2]);
+  });
+
   test("acepta hasta 15% por encima del presupuesto y lo avisa", () => {
     const caro = { ...base, precio: 170000 }; // 340.000 para 2, 13% más
     const muyCaro = { ...base, id: 9, precio: 180000 }; // 20% más

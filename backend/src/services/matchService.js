@@ -22,6 +22,11 @@ function sumarDias(fecha, dias) {
   return d.toISOString().slice(0, 10);
 }
 
+// Días entre dos fechas contando ambas (del 12 al 15 son 4 días).
+function diasEntre(inicio, fin) {
+  return Math.round((Date.parse(aDia(fin)) - Date.parse(aDia(inicio))) / 86400000) + 1;
+}
+
 function formatoCOP(valor) {
   return `$${Math.round(valor).toLocaleString("es-CO")}`;
 }
@@ -38,6 +43,11 @@ function evaluar(solicitud, paquete, { tolerancia, ignorarFecha }) {
   const regreso = sumarDias(salida, Number(paquete.duracion_dias) - 1);
   const enTemporada = salida >= aDia(paquete.fecha_inicio) && regreso <= aDia(paquete.fecha_fin);
   if (!enTemporada && !ignorarFecha) return null;
+
+  // Con fecha de fin (tours y paquetes), el plan tiene que caber entre el inicio y el fin.
+  const diasViaje = solicitud.fecha_regreso ? diasEntre(salida, solicitud.fecha_regreso) : null;
+  const cabe = !diasViaje || Number(paquete.duracion_dias) <= diasViaje;
+  if (!cabe && !ignorarFecha) return null;
 
   const presupuesto = Number(solicitud.presupuesto);
   const total = Number(paquete.precio) * personas;
@@ -73,6 +83,7 @@ function evaluar(solicitud, paquete, { tolerancia, ignorarFecha }) {
   if (calificacion >= 4.7) razones.push(`Muy bien calificado (${calificacion.toFixed(1)})`);
 
   if (!enTemporada) razones.push("No está disponible en tu fecha, pero sí en otras");
+  if (!cabe) razones.push(`Dura ${paquete.duracion_dias} días y tu viaje es de ${diasViaje}`);
 
   return {
     paquete,

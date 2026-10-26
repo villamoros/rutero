@@ -23,13 +23,14 @@ function resumen(r) {
 
 async function createSolicitud(req, res, next) {
   try {
-    const { modo, id_destino, tipo, personas, fecha_viaje, presupuesto, preferencias = [] } = req.body;
+    const { modo, id_destino, tipo, personas, fecha_viaje, fecha_regreso, presupuesto, preferencias = [] } = req.body;
     const solicitud = await Solicitud.create({
       modo,
       id_destino: modo === "destino" ? id_destino : null,
       tipo: tipo || null,
       personas,
       fecha_viaje,
+      fecha_regreso: tipo === "pasadia" ? null : fecha_regreso || null,
       presupuesto,
       preferencias,
     });

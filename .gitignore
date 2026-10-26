@@ -1,0 +1,25 @@
+# Dependencias
+node_modules/
+
+# Expo / builds
+.expo/
+dist/
+web-build/
+
+# Base de datos local
+*.sqlite
+*.sqlite-journal
+
+# Variables de entorno (se versionan solo los .env.example)
+.env
+.env.*
+!.env.example
+
+# Logs y cobertura
+*.log
+npm-debug.log*
+coverage/
+
+# Sistema
+.DS_Store
+Thumbs.db

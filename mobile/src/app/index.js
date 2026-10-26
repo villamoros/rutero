@@ -2,7 +2,7 @@ import { router } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Boton } from "../components/ui";
-import { colors } from "../lib/theme";
+import { colors, fonts } from "../lib/theme";
 
 export default function Inicio() {
   return (
@@ -29,11 +29,11 @@ export default function Inicio() {
 }
 
 const styles = StyleSheet.create({
-  pantalla: { flex: 1, backgroundColor: colors.mar, justifyContent: "space-between" },
+  pantalla: { flex: 1, backgroundColor: colors.papel, justifyContent: "space-between" },
   hero: { padding: 28, paddingTop: 64 },
-  logo: { color: colors.coral, fontSize: 18, fontWeight: "800", letterSpacing: 2, textTransform: "uppercase" },
-  titulo: { color: colors.blanco, fontSize: 34, fontWeight: "800", marginTop: 16, lineHeight: 40 },
-  subtitulo: { color: "#CFE5E2", fontSize: 17, marginTop: 16, lineHeight: 24 },
-  acciones: { backgroundColor: colors.arena, padding: 24, paddingBottom: 36, borderTopLeftRadius: 28, borderTopRightRadius: 28 },
+  logo: { color: colors.tinta, fontSize: 18, fontFamily: fonts.titulo, letterSpacing: 2, textTransform: "uppercase" },
+  titulo: { color: colors.texto, fontSize: 36, fontFamily: fonts.titulo, marginTop: 16, lineHeight: 40 },
+  subtitulo: { color: colors.suave, fontFamily: fonts.texto, fontSize: 17, marginTop: 16, lineHeight: 24 },
+  acciones: { backgroundColor: colors.blanco, padding: 24, paddingBottom: 36, borderTopLeftRadius: 28, borderTopRightRadius: 28 },
   nota: { color: colors.suave, textAlign: "center", marginTop: 18, fontSize: 13 },
 });

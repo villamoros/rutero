@@ -3,7 +3,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Boton, Etiqueta, Tarjeta } from "../components/ui";
 import { useBusqueda } from "../lib/busqueda";
 import { cop, fechaCorta } from "../lib/format";
-import { colors, TIPO_NOMBRE } from "../lib/theme";
+import { colors, fonts, TIPO_NOMBRE } from "../lib/theme";
 
 export default function Resultados() {
   const { busqueda } = useBusqueda();
@@ -71,15 +71,15 @@ const styles = StyleSheet.create({
   centro: { flex: 1, alignItems: "center", justifyContent: "center", padding: 24 },
   vacio: { fontSize: 16, color: colors.suave },
   contenido: { padding: 20, paddingBottom: 40 },
-  resumen: { color: colors.suave, fontWeight: "600" },
-  titulo: { fontSize: 24, fontWeight: "800", color: colors.texto, marginTop: 4, marginBottom: 14 },
+  resumen: { color: colors.suave, fontFamily: fonts.medio },
+  titulo: { fontSize: 24, fontFamily: fonts.titulo, color: colors.texto, marginTop: 4, marginBottom: 14 },
   ayuda: { color: colors.suave, marginTop: -6, marginBottom: 14, lineHeight: 20 },
   cabecera: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  puntaje: { color: colors.coral, fontWeight: "800" },
-  nombre: { fontSize: 19, fontWeight: "800", color: colors.texto, marginTop: 10 },
+  puntaje: { color: colors.selva, fontFamily: fonts.titulo },
+  nombre: { fontSize: 19, fontFamily: fonts.titulo, color: colors.texto, marginTop: 10 },
   detalle: { color: colors.suave, marginTop: 4 },
   precios: { flexDirection: "row", alignItems: "baseline", marginTop: 10, marginBottom: 6, flexWrap: "wrap" },
-  total: { fontSize: 22, fontWeight: "800", color: colors.mar, marginRight: 8 },
+  total: { fontSize: 22, fontFamily: fonts.titulo, color: colors.tinta, marginRight: 8 },
   porPersona: { color: colors.suave },
   razon: { color: colors.texto, marginTop: 3 },
   proveedor: { color: colors.suave, marginTop: 10, fontSize: 13 },

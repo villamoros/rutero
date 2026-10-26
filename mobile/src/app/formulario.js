@@ -6,7 +6,7 @@ import { Boton, Chip } from "../components/ui";
 import { api } from "../lib/api";
 import { useBusqueda } from "../lib/busqueda";
 import { cop, fechaCorta } from "../lib/format";
-import { colors } from "../lib/theme";
+import { colors, fonts } from "../lib/theme";
 
 // Formulario progresivo del wireframe: "Tengo un destino" y "Tengo un presupuesto"
 // comparten pasos, solo cambia el orden y si se pregunta el destino.
@@ -89,7 +89,7 @@ export default function Formulario() {
   if (!opciones) {
     return (
       <View style={styles.centro}>
-        <ActivityIndicator color={colors.mar} size="large" />
+        <ActivityIndicator color={colors.tinta} size="large" />
       </View>
     );
   }
@@ -222,25 +222,25 @@ function Fila({ etiqueta, valor }) {
 const styles = StyleSheet.create({
   centro: { flex: 1, alignItems: "center", justifyContent: "center", padding: 24 },
   progreso: { height: 4, backgroundColor: colors.borde },
-  progresoLleno: { height: 4, backgroundColor: colors.coral },
+  progresoLleno: { height: 4, backgroundColor: colors.tinta },
   contenido: { padding: 20, paddingBottom: 40 },
-  contador: { color: colors.suave, fontWeight: "600" },
-  titulo: { fontSize: 26, fontWeight: "800", color: colors.texto, marginTop: 4, marginBottom: 18 },
+  contador: { color: colors.suave, fontFamily: fonts.medio },
+  titulo: { fontSize: 26, fontFamily: fonts.titulo, color: colors.texto, marginTop: 4, marginBottom: 18 },
   opcion: { backgroundColor: colors.blanco, borderRadius: 14, padding: 14, marginBottom: 10, borderWidth: 1.5, borderColor: colors.borde },
-  opcionActiva: { borderColor: colors.marClaro, backgroundColor: "#E7F3F1" },
-  opcionTitulo: { fontSize: 17, fontWeight: "700", color: colors.texto },
+  opcionActiva: { borderColor: colors.tinta, backgroundColor: colors.solClaro },
+  opcionTitulo: { fontSize: 17, fontFamily: fonts.negrita, color: colors.texto },
   opcionTexto: { color: colors.suave, marginTop: 4 },
   chips: { flexDirection: "row", flexWrap: "wrap" },
   ayuda: { color: colors.suave, marginBottom: 12, marginTop: 4 },
   stepper: { flexDirection: "row", alignItems: "center", justifyContent: "center", marginTop: 20 },
-  stepperBoton: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.blanco, borderWidth: 1.5, borderColor: colors.mar, alignItems: "center", justifyContent: "center" },
-  stepperSigno: { fontSize: 28, color: colors.mar, fontWeight: "700" },
-  stepperValor: { fontSize: 44, fontWeight: "800", color: colors.texto, marginHorizontal: 36, minWidth: 50, textAlign: "center" },
-  input: { backgroundColor: colors.blanco, borderRadius: 14, borderWidth: 1.5, borderColor: colors.borde, fontSize: 28, fontWeight: "700", padding: 16, color: colors.texto },
+  stepperBoton: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.blanco, borderWidth: 1.5, borderColor: colors.tinta, alignItems: "center", justifyContent: "center" },
+  stepperSigno: { fontSize: 28, color: colors.tinta, fontFamily: fonts.negrita },
+  stepperValor: { fontSize: 44, fontFamily: fonts.titulo, color: colors.texto, marginHorizontal: 36, minWidth: 50, textAlign: "center" },
+  input: { backgroundColor: colors.blanco, borderRadius: 14, borderWidth: 1.5, borderColor: colors.borde, fontSize: 28, fontFamily: fonts.negrita, padding: 16, color: colors.texto },
   resumen: { backgroundColor: colors.blanco, borderRadius: 16, padding: 16, borderWidth: 1, borderColor: colors.borde },
-  fila: { paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: colors.arena },
+  fila: { paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: colors.papel },
   filaEtiqueta: { color: colors.suave, fontSize: 13 },
-  filaValor: { color: colors.texto, fontSize: 16, fontWeight: "600", marginTop: 2 },
+  filaValor: { color: colors.texto, fontSize: 16, fontFamily: fonts.medio, marginTop: 2 },
   error: { color: colors.error, marginTop: 12, textAlign: "center" },
-  pie: { flexDirection: "row", padding: 16, borderTopWidth: 1, borderTopColor: colors.borde, backgroundColor: colors.arena },
+  pie: { flexDirection: "row", padding: 16, borderTopWidth: 1, borderTopColor: colors.borde, backgroundColor: colors.papel },
 });

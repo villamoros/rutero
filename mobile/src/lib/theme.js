@@ -1,13 +1,25 @@
+// Paleta construida alrededor del isotipo: negro tinta y blanco papel,
+// con amarillo sol como acento y verde selva para detalles del Pacífico.
 export const colors = {
-  mar: "#0B4F4A",
-  marClaro: "#127C74",
-  arena: "#F6F1E7",
-  coral: "#E8704F",
-  texto: "#1F2A2A",
-  suave: "#5E6B6A",
-  borde: "#DDD5C5",
+  tinta: "#141414",
+  tintaSuave: "#2B2B2B",
+  papel: "#F7F4EE",
+  sol: "#FFC23D",
+  solClaro: "#FFF1CC",
+  selva: "#1F6B52",
+  texto: "#141414",
+  suave: "#6B675F",
+  borde: "#E3DDD2",
   blanco: "#FFFFFF",
   error: "#B3261E",
+};
+
+export const fonts = {
+  titulo: "BricolageGrotesque_800ExtraBold",
+  tituloMedio: "BricolageGrotesque_600SemiBold",
+  texto: "Figtree_400Regular",
+  medio: "Figtree_600SemiBold",
+  negrita: "Figtree_700Bold",
 };
 
 export const TIPO_NOMBRE = {

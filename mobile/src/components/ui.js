@@ -1,5 +1,5 @@
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
-import { colors } from "../lib/theme";
+import { colors, fonts } from "../lib/theme";
 
 export function Boton({ titulo, onPress, variante = "primario", deshabilitado, cargando, style }) {
   const secundario = variante === "secundario";
@@ -17,9 +17,9 @@ export function Boton({ titulo, onPress, variante = "primario", deshabilitado, c
       ]}
     >
       {cargando ? (
-        <ActivityIndicator color={secundario ? colors.mar : colors.blanco} />
+        <ActivityIndicator color={secundario ? colors.tinta : colors.blanco} />
       ) : (
-        <Text style={[styles.botonTexto, secundario && { color: colors.mar }]}>{titulo}</Text>
+        <Text style={[styles.botonTexto, secundario && { color: colors.tinta }]}>{titulo}</Text>
       )}
     </Pressable>
   );
@@ -38,7 +38,7 @@ export function Chip({ texto, activo, onPress }) {
   );
 }
 
-export function Etiqueta({ texto, color = colors.marClaro }) {
+export function Etiqueta({ texto, color = colors.selva }) {
   return (
     <View style={[styles.etiqueta, { backgroundColor: color }]}>
       <Text style={styles.etiquetaTexto}>{texto}</Text>
@@ -52,15 +52,15 @@ export function Tarjeta({ children, style }) {
 
 const styles = StyleSheet.create({
   boton: {
-    backgroundColor: colors.mar,
+    backgroundColor: colors.tinta,
     paddingVertical: 16,
     paddingHorizontal: 20,
     borderRadius: 14,
     alignItems: "center",
   },
-  botonSecundario: { backgroundColor: colors.blanco, borderWidth: 1.5, borderColor: colors.mar },
+  botonSecundario: { backgroundColor: colors.blanco, borderWidth: 1.5, borderColor: colors.tinta },
   botonDeshabilitado: { opacity: 0.45 },
-  botonTexto: { color: colors.blanco, fontSize: 16, fontWeight: "700" },
+  botonTexto: { color: colors.blanco, fontSize: 16, fontFamily: fonts.negrita },
   chip: {
     borderWidth: 1.5,
     borderColor: colors.borde,
@@ -71,10 +71,10 @@ const styles = StyleSheet.create({
     marginRight: 8,
     marginBottom: 8,
   },
-  chipActivo: { backgroundColor: colors.marClaro, borderColor: colors.marClaro },
-  chipTexto: { color: colors.texto, fontWeight: "600" },
+  chipActivo: { backgroundColor: colors.tinta, borderColor: colors.tinta },
+  chipTexto: { color: colors.texto, fontFamily: fonts.medio },
   etiqueta: { borderRadius: 6, paddingHorizontal: 8, paddingVertical: 3, alignSelf: "flex-start" },
-  etiquetaTexto: { color: colors.blanco, fontSize: 12, fontWeight: "700" },
+  etiquetaTexto: { color: colors.blanco, fontSize: 12, fontFamily: fonts.negrita },
   tarjeta: {
     backgroundColor: colors.blanco,
     borderRadius: 16,

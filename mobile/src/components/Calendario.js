@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { colors } from "../lib/theme";
+import { colors, fonts } from "../lib/theme";
 import { hoyISO, toISO } from "../lib/format";
 
 const MESES = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
@@ -64,11 +64,11 @@ export default function Calendario({ valor, onChange }) {
 const styles = StyleSheet.create({
   contenedor: { backgroundColor: colors.blanco, borderRadius: 16, padding: 12, borderWidth: 1, borderColor: colors.borde },
   cabecera: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 8, paddingHorizontal: 8 },
-  flecha: { fontSize: 30, color: colors.mar, paddingHorizontal: 8 },
-  mes: { fontSize: 17, fontWeight: "700", color: colors.texto },
+  flecha: { fontSize: 30, color: colors.tinta, paddingHorizontal: 8 },
+  mes: { fontSize: 17, fontFamily: fonts.negrita, color: colors.texto },
   grilla: { flexDirection: "row", flexWrap: "wrap" },
   celda: { width: `${100 / 7}%`, aspectRatio: 1, alignItems: "center", justifyContent: "center", borderRadius: 999 },
-  diaSemana: { color: colors.suave, fontWeight: "700", textAlign: "center", textAlignVertical: "center", lineHeight: 40 },
+  diaSemana: { color: colors.suave, fontFamily: fonts.negrita, textAlign: "center", textAlignVertical: "center", lineHeight: 40 },
   dia: { fontSize: 15, color: colors.texto },
-  elegido: { backgroundColor: colors.coral },
+  elegido: { backgroundColor: colors.tinta },
 });

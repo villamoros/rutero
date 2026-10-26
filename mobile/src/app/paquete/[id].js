@@ -5,7 +5,7 @@ import { Boton, Etiqueta, Tarjeta } from "../../components/ui";
 import { api } from "../../lib/api";
 import { useBusqueda } from "../../lib/busqueda";
 import { cop, fechaCorta } from "../../lib/format";
-import { colors, TIPO_NOMBRE } from "../../lib/theme";
+import { colors, fonts, TIPO_NOMBRE } from "../../lib/theme";
 
 export default function DetallePaquete() {
   const { id } = useLocalSearchParams();
@@ -44,7 +44,7 @@ export default function DetallePaquete() {
   if (!paquete) {
     return (
       <View style={styles.centro}>
-        {error ? <Text style={styles.error}>{error}</Text> : <ActivityIndicator color={colors.mar} size="large" />}
+        {error ? <Text style={styles.error}>{error}</Text> : <ActivityIndicator color={colors.tinta} size="large" />}
       </View>
     );
   }
@@ -110,15 +110,15 @@ export default function DetallePaquete() {
 const styles = StyleSheet.create({
   centro: { flex: 1, alignItems: "center", justifyContent: "center", padding: 24 },
   contenido: { padding: 20, paddingBottom: 40 },
-  nombre: { fontSize: 26, fontWeight: "800", color: colors.texto, marginTop: 10 },
+  nombre: { fontSize: 26, fontFamily: fonts.titulo, color: colors.texto, marginTop: 10 },
   detalle: { color: colors.suave, marginTop: 4 },
   texto: { color: colors.texto, fontSize: 16, lineHeight: 23, marginTop: 12, textAlign: "left" },
-  seccion: { fontSize: 17, fontWeight: "800", color: colors.texto, marginBottom: 8 },
-  servicio: { paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: colors.arena },
-  servicioNombre: { fontWeight: "700", color: colors.texto },
+  seccion: { fontSize: 17, fontFamily: fonts.titulo, color: colors.texto, marginBottom: 8 },
+  servicio: { paddingVertical: 8, borderBottomWidth: 1, borderBottomColor: colors.papel },
+  servicioNombre: { fontFamily: fonts.negrita, color: colors.texto },
   servicioCategoria: { color: colors.suave, marginTop: 2 },
-  total: { fontSize: 26, fontWeight: "800", color: colors.mar },
+  total: { fontSize: 26, fontFamily: fonts.titulo, color: colors.tinta },
   input: { borderWidth: 1.5, borderColor: colors.borde, borderRadius: 12, padding: 12, fontSize: 16, marginBottom: 10, backgroundColor: colors.blanco },
   error: { color: colors.error, marginVertical: 6 },
-  listo: { fontSize: 26, fontWeight: "800", color: colors.mar },
+  listo: { fontSize: 26, fontFamily: fonts.titulo, color: colors.tinta },
 });
